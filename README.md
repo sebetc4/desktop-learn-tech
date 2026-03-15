@@ -6,6 +6,12 @@ A modern learning management desktop application built with Electron, React, and
 
 ## ✨ Features
 
+### Dashboard
+- **Progress Ring**: Visualize overall learning progress with an interactive ring chart
+- **Statistics Overview**: Quick access to total courses, completed lessons, and learning hours
+- **Recent Courses**: See recently accessed courses with progress bars for quick continuation
+- **Quick Actions**: One-click buttons to continue learning, browse courses, or import new content
+
 ### 📚 Course Management
 
 - **Import Courses**: Support for ZIP and TAR.ZST archives with real-time extraction progress
@@ -45,7 +51,7 @@ A modern learning management desktop application built with Electron, React, and
 ### Core
 
 - **Electron**: Cross-platform desktop framework
-- **React 18**: Modern UI library with hooks
+- **React 19**: Modern UI library with hooks
 - **TypeScript**: Type-safe development
 - **Electron Vite**: Fast build tooling
 

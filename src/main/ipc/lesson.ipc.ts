@@ -2,10 +2,12 @@ import { FolderService } from '../services'
 import { LessonService } from '../services/lesson/lesson.service'
 import { pathService } from '../services/path/path.service'
 import { IPC } from '@/constants'
-import { ipcMain } from 'electron'
+import { app, dialog, ipcMain } from 'electron'
 import fs from 'fs/promises'
+import path from 'path'
 
 import type {
+    DownloadFileIPCHandlerParams,
     GetCodeSnippetContentIPCHandlerParams,
     GetJSXLessonContentIPCHandlerParams,
     GetLessonStoreDataIPCHandlerParams,
@@ -96,6 +98,61 @@ export const registerLessonIpcHandlers = (
                 return {
                     success: false,
                     message: `Error loading code content: ${error instanceof Error ? error.message : 'Unknown error'}`
+                }
+            }
+        }
+    )
+
+    ipcMain.handle(
+        IPC.LESSON.DOWNLOAD_FILE,
+        async (_event, params: DownloadFileIPCHandlerParams) => {
+            try {
+                const downloadPath = pathService.getDownloadPath(params)
+                const fullPath = folderService.getPathFromFolder(downloadPath)
+
+                const coursesRootPath = folderService.rootPath
+                if (!coursesRootPath || !fullPath.startsWith(coursesRootPath)) {
+                    return {
+                        success: false,
+                        message: 'Access denied: invalid file path'
+                    }
+                }
+
+                try {
+                    await fs.access(fullPath)
+                } catch {
+                    return {
+                        success: false,
+                        message: `File not found: ${params.fileName}`
+                    }
+                }
+
+                const { canceled, filePath } = await dialog.showSaveDialog({
+                    defaultPath: path.join(
+                        app.getPath('downloads'),
+                        params.fileName
+                    ),
+                    properties: ['createDirectory']
+                })
+
+                if (canceled || !filePath) {
+                    return {
+                        success: true,
+                        message: 'Download cancelled by user'
+                    }
+                }
+
+                await fs.copyFile(fullPath, filePath)
+
+                return {
+                    success: true,
+                    message: 'File downloaded successfully'
+                }
+            } catch (error) {
+                console.error('Error downloading file:', error)
+                return {
+                    success: false,
+                    message: `Error downloading file: ${error instanceof Error ? error.message : 'Unknown error'}`
                 }
             }
         }

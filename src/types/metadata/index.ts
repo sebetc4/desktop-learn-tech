@@ -1,4 +1,5 @@
 export * from './code-snippet-metadata.types'
+export * from './download-metadata.types'
 export * from './lesson-metadata.types'
 export * from './resources-metadata.types'
 export * from './chapter-metadata.types'

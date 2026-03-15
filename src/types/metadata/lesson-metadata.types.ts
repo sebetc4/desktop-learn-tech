@@ -1,4 +1,5 @@
 import { CodeSnippetMetadata } from './code-snippet-metadata.types'
+import { DownloadMetadata } from './download-metadata.types'
 import { ResourceMetadata } from './resources-metadata.types'
 
 import { LessonType } from '@/types'
@@ -14,4 +15,5 @@ export interface LessonMetadata {
 
     codeSnippets: CodeSnippetMetadata[]
     resources: ResourceMetadata[]
+    downloads: DownloadMetadata[]
 }

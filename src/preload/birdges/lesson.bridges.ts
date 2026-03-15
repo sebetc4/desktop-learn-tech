@@ -2,6 +2,7 @@ import { IPC } from '@/constants'
 import { ipcRenderer } from 'electron'
 
 import type {
+    DownloadFileIPCHandlerParams,
     GetCodeSnippetContentIPCHandlerParams,
     GetJSXLessonContentIPCHandlerParams,
     GetLessonStoreDataIPCHandlerParams,
@@ -14,5 +15,7 @@ export const lessonContextBridge: LessonAPI = {
     getJSXContent: (params: GetJSXLessonContentIPCHandlerParams) =>
         ipcRenderer.invoke(IPC.LESSON.GET_JSX_CONTENT, params),
     getCodeSnippetContent: (params: GetCodeSnippetContentIPCHandlerParams) =>
-        ipcRenderer.invoke(IPC.LESSON.GET_CODE_SNIPPET_CONTENT, params)
+        ipcRenderer.invoke(IPC.LESSON.GET_CODE_SNIPPET_CONTENT, params),
+    downloadFile: (params: DownloadFileIPCHandlerParams) =>
+        ipcRenderer.invoke(IPC.LESSON.DOWNLOAD_FILE, params)
 }

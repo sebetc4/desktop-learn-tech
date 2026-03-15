@@ -2,6 +2,7 @@ import {
     ChapterDatabaseManager,
     CodeSnippetDatabaseManager,
     CourseDatabaseManager,
+    DownloadDatabaseManager,
     LessonDatabaseManager,
     ProgressDatabaseManager,
     ResourceDatabaseManager,
@@ -26,6 +27,7 @@ export class DatabaseService {
     #chapterManager!: ChapterDatabaseManager
     #codeSnippetManager!: CodeSnippetDatabaseManager
     #courseManager!: CourseDatabaseManager
+    #downloadManager!: DownloadDatabaseManager
     #lessonManager!: LessonDatabaseManager
     #progressManager!: ProgressDatabaseManager
     #resourceManager!: ResourceDatabaseManager
@@ -44,6 +46,10 @@ export class DatabaseService {
 
     get course() {
         return this.#courseManager
+    }
+
+    get download() {
+        return this.#downloadManager
     }
 
     get lesson() {
@@ -124,6 +130,10 @@ export class DatabaseService {
             this.#executeWithAutoSave.bind(this)
         )
         this.#courseManager = new CourseDatabaseManager(
+            this.#db,
+            this.#executeWithAutoSave.bind(this)
+        )
+        this.#downloadManager = new DownloadDatabaseManager(
             this.#db,
             this.#executeWithAutoSave.bind(this)
         )

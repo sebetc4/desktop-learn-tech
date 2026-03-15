@@ -4,6 +4,7 @@ import {
     courseHistory,
     courseProgress,
     courses,
+    downloads,
     lessonProgress,
     lessons,
     resources,
@@ -56,12 +57,20 @@ export const lessonsRelations = relations(lessons, ({ one, many }) => ({
         references: [chapters.id]
     }),
     resources: many(resources),
+    downloads: many(downloads),
     lessonProgresses: many(lessonProgress)
 }))
 
 export const resourcesRelations = relations(resources, ({ one }) => ({
     lesson: one(lessons, {
         fields: [resources.lessonId],
+        references: [lessons.id]
+    })
+}))
+
+export const downloadsRelations = relations(downloads, ({ one }) => ({
+    lesson: one(lessons, {
+        fields: [downloads.lessonId],
         references: [lessons.id]
     })
 }))

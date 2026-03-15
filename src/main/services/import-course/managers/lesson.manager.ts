@@ -1,6 +1,6 @@
 import { DatabaseService } from '../../database'
 
-import type { CodeSnippetMetadata, LessonMetadata, ResourceMetadata } from '@/types'
+import type { CodeSnippetMetadata, DownloadMetadata, LessonMetadata, ResourceMetadata } from '@/types'
 
 interface ProcessParams extends LessonMetadata {
     courseId: string
@@ -23,6 +23,7 @@ export class LessonManager {
             videoDuration,
             codeSnippets,
             resources,
+            downloads = [],
             courseId
         }: ProcessParams
     ) => {
@@ -39,7 +40,8 @@ export class LessonManager {
 
             await Promise.all([
                 this.#processLessonCodeSnippets(id, codeSnippets),
-                this.#processLessonResources(id, resources)
+                this.#processLessonResources(id, resources),
+                this.#processLessonDownloads(id, downloads)
             ])
         } catch (error) {
             console.error('Error creating lesson in database:', error)
@@ -72,6 +74,22 @@ export class LessonManager {
             }
         } catch (error) {
             console.error('Error processing lesson resources:', error)
+            throw error
+        }
+    }
+
+    async #processLessonDownloads(lessonId: string, downloads: DownloadMetadata[]) {
+        try {
+            for (const download of downloads) {
+                await this.#database.download.create({
+                    id: download.id,
+                    fileName: download.fileName,
+                    label: download.label,
+                    lessonId: lessonId
+                })
+            }
+        } catch (error) {
+            console.error('Error processing lesson downloads:', error)
             throw error
         }
     }

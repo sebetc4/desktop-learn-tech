@@ -1,6 +1,12 @@
 import { useLessonStore, useUserStore } from '../../store'
 import styles from './LessonPage.module.scss'
-import { FooterSection, NavigationSection, TextSection, VideoSection } from './components'
+import {
+    DownloadSection,
+    FooterSection,
+    NavigationSection,
+    TextSection,
+    VideoSection
+} from './components'
 import { ResourceSection } from './components/ResourcesSection/ResourceSection'
 import { type FC, useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -33,6 +39,7 @@ export const LessonPage: FC = () => {
             {lesson.type !== 'TEXT' && <VideoSection />}
             {lesson.type !== 'VIDEO' && <TextSection />}
             {lesson.resources.length > 0 && <ResourceSection />}
+            {lesson.downloads.length > 0 && <DownloadSection />}
             <FooterSection courseId={courseId} />
         </div>
     ) : (

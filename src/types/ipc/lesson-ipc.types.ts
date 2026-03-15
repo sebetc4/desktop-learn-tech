@@ -1,5 +1,5 @@
 import { LessonViewModel } from '../view-model'
-import type { IPCHandlerReturnWithData } from './core-ipc.types'
+import type { IPCHandlerReturnWithData, IPCHandlerReturnWithoutData } from './core-ipc.types'
 
 // Get One
 export type GetLessonStoreDataIPCHandlerParams = {
@@ -57,3 +57,12 @@ export type GetCodeSnippetContentIPCHandlerParams = {
 export type GetCodeSnippetContentIPCHandlerReturn = IPCHandlerReturnWithData<{
     content: string
 }>
+
+export type DownloadFileIPCHandlerParams = {
+    courseId: string
+    chapterId: string
+    lessonId: string
+    fileName: string
+}
+
+export type DownloadFileIPCHandlerReturn = IPCHandlerReturnWithoutData

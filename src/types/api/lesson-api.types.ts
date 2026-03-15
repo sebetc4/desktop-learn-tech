@@ -1,4 +1,6 @@
 import type {
+    DownloadFileIPCHandlerParams,
+    DownloadFileIPCHandlerReturn,
     GetCodeSnippetContentIPCHandlerParams,
     GetCodeSnippetContentIPCHandlerReturn,
     GetJSXLessonContentIPCHandlerParams,
@@ -17,4 +19,5 @@ export interface LessonAPI {
     getCodeSnippetContent: (
         params: GetCodeSnippetContentIPCHandlerParams
     ) => GetCodeSnippetContentIPCHandlerReturn
+    downloadFile: (params: DownloadFileIPCHandlerParams) => DownloadFileIPCHandlerReturn
 }

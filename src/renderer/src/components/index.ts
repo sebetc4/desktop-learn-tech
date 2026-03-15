@@ -1,6 +1,7 @@
 export { Button } from './Button/Button'
 export * from './Carousel/Carousel'
 export { CodeSnippet } from './course/CodeSnippet/CodeSnippet'
+export { CourseDownload } from './course/CourseDownload/CourseDownload'
 export { CourseImage } from './course/CourseImage/CourseImage'
 export { Dialog } from './Dialog/Dialog'
 export { LessonProgressIcon } from './lesson/LessonProgressIcon/LessonProgressIcon'

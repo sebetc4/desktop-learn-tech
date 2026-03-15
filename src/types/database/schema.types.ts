@@ -4,6 +4,7 @@ import {
     courseHistory,
     courseProgress,
     courses,
+    downloads,
     lessonProgress,
     lessonProgressStatus,
     lessonTypes,
@@ -30,4 +31,5 @@ export type Lesson = typeof lessons.$inferSelect
 export type Resource = typeof resources.$inferInsert
 export type Setting = typeof settings.$inferSelect
 export type User = typeof users.$inferInsert
+export type Download = typeof downloads.$inferInsert
 export type CourseHistoryEntry = typeof courseHistory.$inferSelect

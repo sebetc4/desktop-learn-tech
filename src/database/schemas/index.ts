@@ -1,6 +1,7 @@
 export * from './chapter.schema'
 export * from './code-snippet.schema'
 export * from './course.schema'
+export * from './download.schema'
 export * from './course-progress.schema'
 export * from './lesson-progress.schema'
 export * from './lesson.schema'

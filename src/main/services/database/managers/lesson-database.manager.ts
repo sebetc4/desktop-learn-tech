@@ -1,9 +1,10 @@
-import { codeSnippets, lessonProgress, lessons, resources } from '@/database/schemas'
+import { codeSnippets, downloads, lessonProgress, lessons, resources } from '@/database/schemas'
 import { and, count, eq } from 'drizzle-orm'
 
 import {
     AutoSaveFunction,
     CodeSnippetViewModel,
+    DownloadViewModel,
     DrizzleDB,
     Lesson,
     LessonProgressViewModel,
@@ -91,6 +92,15 @@ export class LessonDatabaseManager {
             .from(resources)
             .where(eq(resources.lessonId, lessonId))
 
+        const downloadsData = await this.#db
+            .select({
+                id: downloads.id,
+                fileName: downloads.fileName,
+                label: downloads.label
+            })
+            .from(downloads)
+            .where(eq(downloads.lessonId, lessonId))
+
         const [progressData] = await this.#db
             .select({
                 id: lessonProgress.id,
@@ -104,6 +114,7 @@ export class LessonDatabaseManager {
             lessonInfo,
             codeSnippetsData,
             resourcesData,
+            downloadsData,
             progressData
         )
     }
@@ -112,12 +123,14 @@ export class LessonDatabaseManager {
         lesson: Lesson,
         codeSnippets: CodeSnippetViewModel[],
         resources: ResourceViewModel[],
+        downloads: DownloadViewModel[],
         progress: LessonProgressViewModel | undefined
     ): LessonViewModel {
         return {
             ...lesson,
             codeSnippets,
             resources,
+            downloads,
             progress: progress || null
         }
     }

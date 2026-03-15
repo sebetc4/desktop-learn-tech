@@ -1,6 +1,7 @@
 export { ChapterDatabaseManager } from './chapter-database.manager'
 export { CodeSnippetDatabaseManager } from './code-snippet-database.manager'
 export { CourseDatabaseManager } from './course-database.manager'
+export { DownloadDatabaseManager } from './download-database.manager'
 export { LessonDatabaseManager } from './lesson-database.manager'
 export { ProgressDatabaseManager } from './progress-database.manager'
 export { ResourceDatabaseManager } from './resource-database.manager'
