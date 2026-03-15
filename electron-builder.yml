@@ -77,5 +77,3 @@ asar: true
 publish:
     provider: github
     releaseType: release
-electronDownload:
-    mirror: https://npmmirror.com/mirrors/electron/
