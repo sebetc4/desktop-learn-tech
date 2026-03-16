@@ -104,6 +104,9 @@
             "electron",
             "electron-winstaller",
             "esbuild"
-        ]
+        ],
+        "overrides": {
+            "canvas": "-"
+        }
     }
 }
