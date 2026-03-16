@@ -36,6 +36,7 @@ A modern learning management desktop application built with Electron, React, and
 
 - **Chapter Organization**: Structured content with chapters and lessons
 - **Multiple Content Types**: Support for text, video, and mixed content lessons
+- **Inline PDF Viewer**: Display PDF documents directly in lessons with zoom, page navigation, text search, fullscreen, and download — powered by `@react-pdf-viewer`
 - **Progress Tracking**: Automatic status tracking (NOT_STARTED, IN_PROGRESS, COMPLETED)
 - **Video Duration**: Track total learning hours based on video content
 

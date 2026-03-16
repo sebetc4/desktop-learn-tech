@@ -23,9 +23,11 @@ my-course/
     │   │   ├── code/                       # Code files displayed with syntax highlighting
     │   │   │   ├── example.js
     │   │   │   └── solution.tsx
-    │   │   └── data/                       # Downloadable files
-    │   │       ├── starter-project.zip
-    │   │       └── cheatsheet.pdf
+    │   │   ├── data/                       # Downloadable files
+    │   │   │   ├── starter-project.zip
+    │   │   │   └── cheatsheet.pdf
+    │   │   └── pdfs/                       # PDF files displayed inline with viewer
+    │   │       └── guide.pdf
     │   └── lesson-02/
     │       └── ...
     └── chapter-02/
@@ -189,6 +191,13 @@ The corresponding file must be placed in `data/{fileName}`.
 - **Supported formats**: PNG, JPG/JPEG, SVG
 - **Referencing**: via the `CourseImage` component in JSX (see next section)
 
+## PDF Files
+
+- **Folder**: `pdfs/` in the lesson folder
+- **Supported formats**: PDF
+- **Display**: inline viewer with zoom, page navigation, and text search (powered by `@react-pdf-viewer/core`)
+- **Referencing**: via the `CoursePDF` component in JSX (see next section)
+
 ## Downloadable Files
 
 - **Folder**: `data/` in the lesson folder
@@ -214,7 +223,7 @@ The `CourseContent.jsx` file contains the lesson's text content, written in JSX.
 The file must export a named component called `CourseContent` that receives the available components as props:
 
 ```jsx
-export const CourseContent = ({ CodeSnippet, CourseImage, CourseDownload }) => {
+export const CourseContent = ({ CodeSnippet, CourseImage, CourseDownload, CoursePDF }) => {
     return (
         <div>
             <h2>Introduction</h2>
@@ -227,6 +236,9 @@ export const CourseContent = ({ CodeSnippet, CourseImage, CourseDownload }) => {
 
             <h2>Resources</h2>
             <CourseDownload fileName="starter-project.zip" label="Starter Project" />
+
+            <h2>Documentation</h2>
+            <CoursePDF fileName="guide.pdf" />
         </div>
     )
 }
@@ -269,11 +281,22 @@ Displays a download button for a file from the `data/` folder.
 />
 ```
 
+#### `CoursePDF`
+
+Displays an inline PDF viewer with zoom, page navigation, and text search. Files are loaded from the lesson's `pdfs/` folder.
+
+```jsx
+<CoursePDF
+    fileName="guide.pdf"               // File name in pdfs/
+    height="750px"                      // Viewer height (optional, defaults to "750px")
+/>
+```
+
 ### Important Rules
 
 - The export must be a **named export** called `CourseContent` using arrow function syntax
 - React is handled internally — do not import or require it
-- Only `CodeSnippet`, `CourseImage`, and `CourseDownload` are injected as props — no other imports are available
+- Only `CodeSnippet`, `CourseImage`, `CourseDownload`, and `CoursePDF` are injected as props — no other imports are available
 - Standard JSX (div, h1, p, ul, li, etc.) works normally
 
 ## Supported Archive Formats
@@ -328,8 +351,10 @@ react-hooks/
     └── ch-01-useState/
         ├── lesson-01-introduction/
         │   ├── CourseContent.jsx
-        │   └── images/
-        │       └── hooks-diagram.png
+        │   ├── images/
+        │   │   └── hooks-diagram.png
+        │   └── pdfs/
+        │       └── hooks-cheatsheet.pdf
         └── lesson-02-counter/
             ├── CourseContent.jsx
             ├── video.mp4
@@ -407,7 +432,7 @@ react-hooks/
 ### CourseContent.jsx (lesson-01-introduction)
 
 ```jsx
-export const CourseContent = ({ CourseImage }) => {
+export const CourseContent = ({ CourseImage, CoursePDF }) => {
     return (
         <div>
             <h2>React Hooks</h2>
@@ -422,6 +447,8 @@ export const CourseContent = ({ CourseImage }) => {
                 <li>Reuse stateful logic between components</li>
                 <li>Avoid classes</li>
             </ul>
+            <h3>Cheatsheet</h3>
+            <CoursePDF fileName="hooks-cheatsheet.pdf" />
         </div>
     )
 }

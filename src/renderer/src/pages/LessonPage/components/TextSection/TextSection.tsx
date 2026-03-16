@@ -1,6 +1,6 @@
 import styles from './TextSection.module.scss'
 import * as babel from '@babel/standalone'
-import { CodeSnippet, CourseDownload, CourseImage } from '@renderer/components'
+import { CodeSnippet, CourseDownload, CourseImage, CoursePDF } from '@renderer/components'
 import { useLessonStore } from '@renderer/store'
 import React, { ComponentType, FC, useCallback, useEffect, useState } from 'react'
 
@@ -8,6 +8,7 @@ interface CompiledComponentProps {
     CodeSnippet: typeof CodeSnippet
     CourseDownload: typeof CourseDownload
     CourseImage: typeof CourseImage
+    CoursePDF: typeof CoursePDF
 }
 
 type CompiledComponent = ComponentType<CompiledComponentProps>
@@ -106,6 +107,7 @@ export const TextSection: FC = () => {
                     CodeSnippet={CodeSnippet}
                     CourseDownload={CourseDownload}
                     CourseImage={CourseImage}
+                    CoursePDF={CoursePDF}
                 />
             )}
         </section>
