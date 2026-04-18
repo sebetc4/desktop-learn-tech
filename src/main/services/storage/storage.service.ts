@@ -1,5 +1,5 @@
 import { IconStorageManager } from './managers'
-import { app } from 'electron'
+import { getAppDataPath } from '@main/utils'
 
 export class StorageService {
     #storagePath: string
@@ -11,7 +11,7 @@ export class StorageService {
     }
 
     constructor() {
-        this.#storagePath = app.getPath('userData')
+        this.#storagePath = getAppDataPath()
         this.#iconManager = new IconStorageManager(this.#storagePath)
     }
 }

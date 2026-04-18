@@ -10,6 +10,7 @@ import {
     UserDatabaseManager
 } from './managers'
 import { CourseHistoryDatabaseManager } from './managers/course-history-database.manager'
+import { getAppDataPath } from '@main/utils'
 import * as relations from '@/database/relations'
 import * as schema from '@/database/schemas'
 import { drizzle } from 'drizzle-orm/sql-js'
@@ -164,8 +165,7 @@ export class DatabaseService {
         if (process.env.NODE_ENV === 'development') {
             return path.join(process.cwd(), 'databases', 'dev.db')
         }
-        const userDataPath = app.getPath('userData')
-        return path.join(userDataPath, 'database.db')
+        return path.join(getAppDataPath(), 'database.db')
     }
 
     async #applyMigrations() {

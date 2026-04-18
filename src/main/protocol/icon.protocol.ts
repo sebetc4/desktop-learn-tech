@@ -1,5 +1,6 @@
+import { getAppDataPath } from '@main/utils'
 import { PROTOCOL, STORAGE_FOLDER } from '@/constants'
-import { app, net, protocol } from 'electron'
+import { net, protocol } from 'electron'
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
@@ -7,7 +8,7 @@ import { pathToFileURL } from 'url'
 export const registerIconProtocol = () => {
     protocol.handle(PROTOCOL.ICON, async (request) => {
         try {
-            const iconRootPath = path.join(app.getPath('userData'), STORAGE_FOLDER.COURSE_ICON)
+            const iconRootPath = path.join(getAppDataPath(), STORAGE_FOLDER.COURSE_ICON)
             if (!iconRootPath) {
                 return new Response('Icons root path is not set', {
                     status: 500,

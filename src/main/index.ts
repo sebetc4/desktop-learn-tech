@@ -19,10 +19,13 @@ import {
     ThemeService,
     UserService
 } from './services'
+import { configureXdgPaths } from './utils'
 import { PROTOCOL } from '@/constants'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { BrowserWindow, app, dialog, protocol, shell } from 'electron'
 import { join } from 'path'
+
+configureXdgPaths()
 
 let mainWindow: BrowserWindow | null = null
 
