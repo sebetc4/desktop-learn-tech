@@ -17,17 +17,15 @@ jobs:
         runs-on: ${{ matrix.os }}
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
 
-            - name: Setup pnpm
-              uses: pnpm/action-setup@v4
+            - name: Setup pnpm and Node.js
+              uses: pnpm/setup@v3
               with:
-                  version: 10
-
-            - uses: actions/setup-node@v6
-              with:
-                  node-version: 24
-                  cache: 'pnpm'
+                  version: 11
+                  runtime: node@24
+                  cache: true
+                  install: false
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
@@ -46,7 +44,7 @@ jobs:
 
             - name: Upload Linux artifacts
               if: matrix.os == 'ubuntu-latest'
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: linux-release
                   path: |
@@ -55,7 +53,7 @@ jobs:
 
             - name: Upload Windows artifacts
               if: matrix.os == 'windows-latest'
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: windows-release
                   path: |
@@ -64,7 +62,7 @@ jobs:
 
             - name: Upload macOS artifacts
               if: matrix.os == 'macos-latest'
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: macos-release
                   path: |
