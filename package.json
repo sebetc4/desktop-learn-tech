@@ -31,7 +31,6 @@
         "db:studio": "drizzle-kit studio"
     },
     "dependencies": {
-        "@babel/plugin-transform-modules-commonjs": "^8.0.1",
         "@babel/standalone": "^8.0.10",
         "@electron-toolkit/preload": "^3.0.2",
         "@electron-toolkit/utils": "^4.0.0",
@@ -53,7 +52,6 @@
         "embla-carousel-autoplay": "^8.6.0",
         "embla-carousel-react": "^8.6.0",
         "lucide-react": "^1.66.0",
-        "parse5": "^8.1.0",
         "pdfjs-dist": "3.11.174",
         "radix-ui": "^1.8.1",
         "react-hook-form": "^7.91.0",
