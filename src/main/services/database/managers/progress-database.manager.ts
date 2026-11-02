@@ -125,7 +125,7 @@ export class ProgressDatabaseManager {
                 }
             } catch (error) {
                 console.error('Error in upsertCourseProgress:', error)
-                throw new Error('Failed to upsert course progress')
+                throw new Error('Failed to upsert course progress', { cause: error })
             }
         })
     }

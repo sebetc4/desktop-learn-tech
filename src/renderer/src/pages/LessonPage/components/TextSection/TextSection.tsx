@@ -57,10 +57,10 @@ export const TextSection: FC = () => {
             }
 
             const transformedCode = babel.transform(jsx, {
-                presets: ['react'],
+                presets: [['react', { runtime: 'classic' }]],
                 plugins: ['transform-modules-commonjs'],
                 filename: 'dynamic-component.jsx'
-            }).code
+            })?.code
 
             if (!transformedCode) {
                 throw new Error('JSX transformation failed')

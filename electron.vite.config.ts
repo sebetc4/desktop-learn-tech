@@ -12,7 +12,9 @@ export default defineConfig({
             }
         },
         build: {
-            rollupOptions: {
+            // check-disk-space is ESM-only and cannot be required from the CJS main bundle
+            externalizeDeps: { exclude: ['check-disk-space'] },
+            rolldownOptions: {
                 output: {
                     manualChunks: undefined
                 }
@@ -46,12 +48,23 @@ export default defineConfig({
             }
         },
         build: {
-            rollupOptions: {
+            rolldownOptions: {
                 output: {
-                    manualChunks: {
-                        'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-                        'ui-vendor': ['lucide-react', 'sonner'],
-                        'form-vendor': ['react-hook-form', '@hookform/resolvers', 'yup']
+                    codeSplitting: {
+                        groups: [
+                            {
+                                name: 'react-vendor',
+                                test: /node_modules[\\/](react|react-dom|react-router-dom)[\\/]/
+                            },
+                            {
+                                name: 'ui-vendor',
+                                test: /node_modules[\\/](lucide-react|sonner)[\\/]/
+                            },
+                            {
+                                name: 'form-vendor',
+                                test: /node_modules[\\/](react-hook-form|@hookform[\\/]resolvers|yup)[\\/]/
+                            }
+                        ]
                     }
                 }
             },

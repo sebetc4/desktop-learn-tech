@@ -18,7 +18,7 @@ export class UserService {
             return user
         } catch (error) {
             console.error(`Error creating user: ${error}`)
-            throw new Error('Failed to create user')
+            throw new Error('Failed to create user', { cause: error })
         }
     }
 
@@ -70,7 +70,7 @@ export class UserService {
             this.#themeService.setCurrentTheme(user.theme)
         } catch (error) {
             console.error(`Error setting current user: ${error}`)
-            throw new Error('Failed to set current user')
+            throw new Error('Failed to set current user', { cause: error })
         }
     }
 
