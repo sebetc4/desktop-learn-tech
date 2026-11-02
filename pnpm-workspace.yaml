@@ -3,7 +3,7 @@ overrides:
 
 allowBuilds:
   "@parcel/watcher": true
-  better-sqlite3: true
+  better-sqlite3: false
   electron: true
   electron-winstaller: true
   esbuild: true

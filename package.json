@@ -80,7 +80,7 @@
         "@types/sql.js": "^1.4.11",
         "@types/tar-stream": "^3.1.4",
         "@vitejs/plugin-react": "^5.2.0",
-        "better-sqlite3": "^11.10.0",
+        "better-sqlite3": "^13.0.3",
         "drizzle-kit": "^0.31.10",
         "electron": "^39.8.8",
         "electron-builder": "^26.8.1",
