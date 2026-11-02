@@ -17,3 +17,4 @@ out
 /resources/database/*
 
 /.vscode
+/.agent-conventions.toml
